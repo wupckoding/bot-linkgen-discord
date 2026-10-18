@@ -1,0 +1,9 @@
+# segredos e dados locais — nunca subir
+.env
+*.db
+*.db-journal
+
+# python
+venv/
+__pycache__/
+*.pyc

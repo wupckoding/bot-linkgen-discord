@@ -1,0 +1,13 @@
+[Unit]
+Description=LINKGEN Discord bot
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+WorkingDirectory=/opt/linkgen
+ExecStart=/opt/linkgen/venv/bin/python /opt/linkgen/bot.py
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
