@@ -235,6 +235,30 @@ async def removelink(inter: discord.Interaction, link: str):
     await inter.response.send_message(f"{msg}\n\n{stock_text()}", ephemeral=True)
 
 
+@client.tree.command(name="removelinks", description="Remove em massa os links de um arquivo .txt, um por linha (só admin)")
+@app_commands.describe(arquivo="Arquivo .txt com os links para remover")
+async def removelinks(inter: discord.Interaction, arquivo: discord.Attachment):
+    if not is_admin(inter):
+        return await deny(inter)
+    if arquivo.size > 5 * 1024 * 1024:
+        await inter.response.send_message("❌ Arquivo muito grande (máx. 5 MB).", ephemeral=True)
+        return
+    await inter.response.defer(ephemeral=True)
+    data = await arquivo.read()
+    urls = extract_links(data.decode("utf-8", errors="ignore"))
+    if not urls:
+        await inter.followup.send("❌ O arquivo não tem nenhum link válido.", ephemeral=True)
+        return
+    removed = 0
+    for url in urls:
+        removed += db.execute("DELETE FROM links WHERE url = ?", (url,)).rowcount
+    db.commit()
+    await inter.followup.send(
+        f"🗑️ Arquivo processado: **{len(urls)}** links\nRemovidos: **{removed}** · Não estavam na lista: **{len(urls) - removed}**\n\n{stock_text()}",
+        ephemeral=True,
+    )
+
+
 @client.tree.command(name="reloadlinks", description="Devolve todos os links usados para o estoque (só admin)")
 async def reloadlinks(inter: discord.Interaction):
     if not is_admin(inter):

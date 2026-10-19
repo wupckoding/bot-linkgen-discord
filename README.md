@@ -28,6 +28,7 @@ Cada link entregue **sai do estoque**, então ninguém recebe repetido, e você 
 - 📦 **Contador de estoque**: toda geração mostra quantos links ainda restam
 - ⚠️ **Aviso de estoque baixo**: avisa quando está na hora de repor
 - 📤 **Upload fácil**: manda um `.txt` com um link por linha e pronto
+- 🗑️ **Remoção em massa**: manda um `.txt` com os links que quer tirar do estoque
 - 🧹 **Sem duplicados**: links repetidos são ignorados automaticamente
 - 📎 **Muitos links? Vira arquivo**: se não couber numa mensagem, o bot manda um `.txt`
 - 💬 **Mais de 400 frases motivacionais** aleatórias embaixo de cada geração
@@ -69,6 +70,7 @@ wupc mandou você não desistir 💪
 | `/uploadlinks arquivo:` | Envia um `.txt` com vários links (um por linha) |
 | `/addlink links:` | Adiciona um ou vários links, separados por espaço |
 | `/removelink link:` | Remove um link do estoque |
+| `/removelinks arquivo:` | Remove em massa: envia um `.txt` com os links que quer tirar (um por linha) |
 | `/reloadlinks` | Devolve todos os links usados para o estoque |
 | `/exportlinks` | Baixa todos os links em `.txt`, com o status de cada um |
 | `/clearlinks confirmar:APAGAR` | Apaga **todos** os links |
